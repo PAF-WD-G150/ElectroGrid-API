@@ -1,7 +1,0 @@
-INDEX VERSION 1.4+C:\Users\thari\OneDrive\Desktop\ElectroGrid-API\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-3968691568.index
-2990391159.index
-4064015750.index
-2070382345.index
-2711427205.index
-963026473.index
