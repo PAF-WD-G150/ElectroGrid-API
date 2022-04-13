@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="ElecBill_Management_API">
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <property name="context-root" value="ElecBill_Management_API"/>
+        <property name="java-output-path" value="/ElecBill_Management_API/build/classes"/>
+    </wb-module>
+</project-modules>
