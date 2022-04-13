@@ -1,0 +1,13 @@
+127.0.0.1 - - [13/Apr/2022:17:24:49 +0530] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [13/Apr/2022:17:25:04 +0530] "GET /ElecBill_Management_API/TariffService/Tariffs HTTP/1.1" 404 804
+0:0:0:0:0:0:0:1 - - [13/Apr/2022:17:28:19 +0530] "POST /ElecBill_Management_API/TariffService/Tariffs/ HTTP/1.1" 404 809
+0:0:0:0:0:0:0:1 - - [13/Apr/2022:17:31:37 +0530] "POST /ElecBill_Management_API/TariffService/Tariffs/ HTTP/1.1" 404 809
+127.0.0.1 - - [13/Apr/2022:17:33:29 +0530] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [13/Apr/2022:17:33:30 +0530] "GET /ElecBill_Management_API/ HTTP/1.1" 404 779
+0:0:0:0:0:0:0:1 - - [13/Apr/2022:17:33:30 +0530] "GET /favicon.ico HTTP/1.1" 404 762
+0:0:0:0:0:0:0:1 - - [13/Apr/2022:17:35:38 +0530] "GET /ElecBill_Management_API/TariffService/ HTTP/1.1" 404 -
+0:0:0:0:0:0:0:1 - - [13/Apr/2022:17:35:44 +0530] "GET /ElecBill_Management_API/TariffService/ HTTP/1.1" 404 -
+0:0:0:0:0:0:0:1 - - [13/Apr/2022:17:36:00 +0530] "GET /ElecBill_Management_API/TariffService/Tariffs/ HTTP/1.1" 200 144
+0:0:0:0:0:0:0:1 - - [13/Apr/2022:17:36:15 +0530] "POST /ElecBill_Management_API/TariffService/Tariffs/ HTTP/1.1" 200 45
+0:0:0:0:0:0:0:1 - - [13/Apr/2022:17:37:50 +0530] "GET /ElecBill_Management_API/TariffService/Tariffs HTTP/1.1" 200 554
+0:0:0:0:0:0:0:1 - - [13/Apr/2022:17:46:44 +0530] "GET /ElecBill_Management_API/TariffService/Tariffs/ HTTP/1.1" 200 554
