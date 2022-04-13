@@ -4,4 +4,3 @@ INDEX VERSION 1.4+C:\Users\thari\OneDrive\Desktop\ElectroGrid-API\.metadata\.plu
 4064015750.index
 2070382345.index
 2711427205.index
-963026473.index
