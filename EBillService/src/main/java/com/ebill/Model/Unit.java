@@ -1,12 +1,15 @@
 package com.ebill.Model;
 
-import com.ebill.DBConnection.*;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
-public class Tariff {
+import com.ebill.DBConnection.DBConnect;
 
-	
-	public String insertTariff(String tariff_type, String tariff_desc, String fixed_charge) 
+public class Unit {
+
+	public String insertUnit(String unit_desc, String unit_charge, String tariff_id) 
 	{ 
 		String output = ""; 
 		try
@@ -18,33 +21,34 @@ public class Tariff {
 				return "Error while connecting to the database for inserting Tariff."; } 
 				
 			// create a prepared statement
-			String query = " insert into e_tariff (`tariff_id`,`tariff_type`,`tariff_desc`,`fixed_charge`)"
+			String query = " insert into e_units (`unit_id`,`unit_desc`,`unit_charge`,`tariff_id`)"
 					+ " values (?, ?, ?, ?)"; 
 			
 			PreparedStatement preparedStmt = con.prepareStatement(query); 
 	 
 			// binding values
 			preparedStmt.setInt(1, 0); 
-			preparedStmt.setString(2, tariff_type); 
-			preparedStmt.setString(3, tariff_desc); 
-			preparedStmt.setDouble(4, Double.parseDouble(fixed_charge)); 
+			preparedStmt.setString(2, unit_desc); 
+			preparedStmt.setDouble(3, Double.parseDouble(unit_charge)); 
+			preparedStmt.setInt(4, Integer.parseInt(tariff_id)); 
 			 
 			
 			// execute the statement
 			preparedStmt.execute(); 
 			
 			con.close(); 
-			output = "Tariff Inserted successfully"; 
+			output = "Unit Details Inserted successfully"; 
 		} 
 		catch (Exception e) 
 		{ 
-			output = "Error while inserting the tariff."; 
+			output = "Error while inserting the unit details."; 
 			System.err.println(e.getMessage()); 
 		} 
 		return output; 
 	 } 
 	
-	public String readTariffs() 
+	
+	public String readUnits() 
 	{ 
 		String output = ""; 
 		try
@@ -58,11 +62,11 @@ public class Tariff {
 			
 			// Prepare the HTML table to be displayed
 				
-			output = "<table border='1'><tr><th>Tariff Type</th><th>Tariff Description</th>" +
-					"<th>Fixed Charge</th>" + 
+			output = "<table border='1'><tr><th>Unit Description</th><th>Unit Charge</th>" +
+					"<th>Tariff Type</th>" + 
 					"<th>Update</th><th>Remove</th></tr>"; 
 	 
-			String query = "select * from e_tariff";
+			String query = "select * from e_units";
 			
 			Statement stmt = con.createStatement();
 			
@@ -71,22 +75,22 @@ public class Tariff {
 			// iterate through the rows in the result set
 			while (rs.next()) 
 			{ 
+				String unit_id = Integer.toString(rs.getInt("unit_id")); 
+				String unit_desc = rs.getString("unit_desc"); 
+				String unit_charge = Double.toString(rs.getDouble("unit_charge")); 
 				String tariff_id = Integer.toString(rs.getInt("tariff_id")); 
-				String tariff_type = rs.getString("tariff_type"); 
-				String tariff_desc = rs.getString("tariff_desc"); 
-				String fixed_charge = Double.toString(rs.getDouble("fixed_charge")); 
 				
 				// Add into the HTML table
-				output += "<tr><td>" + tariff_type + "</td>"; 
-				output += "<td>" + tariff_desc + "</td>"; 
-				output += "<td>" + fixed_charge + "</td>"; 
+				output += "<tr><td>" + unit_desc + "</td>"; 
+				output += "<td>" + unit_charge + "</td>"; 
+				output += "<td>" + tariff_id + "</td>"; 
 				 
 				
 				// buttons
 				output += "<td><input name='btnUpdate' type='button' value='Update' class='btn btn-secondary'></td>"
-						+ "<td><form method='post' action='tariffs.jsp'>"
+						+ "<td><form method='post' action='units.jsp'>"
 						+ "<input name='btnRemove' type='submit' value='Remove' class='btn btn-danger'>"
-						+ "<input name='tariff_id' type='hidden' value='" + tariff_id 
+						+ "<input name='unit_id' type='hidden' value='" + unit_id 
 						+ "'>" + "</form></td></tr>"; 
 			} 
 				
@@ -97,13 +101,13 @@ public class Tariff {
 		} 
 		catch (Exception e) 
 		{ 
-			output = "Error while reading the tariffs."; 
+			output = "Error while reading the unit details."; 
 			System.err.println(e.getMessage()); 
 		} 
 		return output; 
-	 } 
+	 }
 	
-	public String updateTariff(String tariff_id, String tariff_type, String tariff_desc, String fixed_charge)
+	public String updateUnit(String unit_id, String unit_desc, String unit_charge, String tariff_id)
 	{ 
 		 String output = "";
 		 
@@ -116,14 +120,14 @@ public class Tariff {
 			 }
 			 
 			 // create a prepared statement
-			 String query = "UPDATE e_tariff SET tariff_type=?,tariff_desc=?,fixed_charge=? WHERE tariff_id=?"; 
+			 String query = "UPDATE e_units SET unit_desc=?,unit_charge=?,tariff_id=? WHERE unit_id=?"; 
 			 PreparedStatement preparedStmt = con.prepareStatement(query);
 			 
 			 // binding values
-			 preparedStmt.setString(1, tariff_type); 
-			 preparedStmt.setString(2, tariff_desc); 
-			 preparedStmt.setDouble(3, Double.parseDouble(fixed_charge));  
-			 preparedStmt.setInt(4, Integer.parseInt(tariff_id)); 
+			 preparedStmt.setString(1, unit_desc); 
+			 preparedStmt.setDouble(2, Double.parseDouble(unit_charge)); 
+			 preparedStmt.setInt(3, Integer.parseInt(tariff_id)); 
+			 preparedStmt.setInt(4, Integer.parseInt(unit_id)); 
 		 
 			 // execute the statement
 			 preparedStmt.execute(); 
@@ -133,14 +137,14 @@ public class Tariff {
 		 } 
 		 catch (Exception e) 
 		 { 
-			 output = "Error while updating the tariff."; 
+			 output = "Error while updating the units."; 
 			 System.err.println(e.getMessage()); 
 		 } 
 		 
 		 return output; 
 	} 
 	
-	public String deleteTariff(String tariff_id) 
+	public String deleteUnit(String unit_id) 
 	{ 
 		String output = ""; 
 		try
@@ -152,11 +156,11 @@ public class Tariff {
 			} 
 			
 			// create a prepared statement
-			String query = "delete from e_tariff where tariff_id=?"; 
+			String query = "delete from e_units where unit_id=?"; 
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			
 			// binding values
-			preparedStmt.setInt(1, Integer.parseInt(tariff_id)); 
+			preparedStmt.setInt(1, Integer.parseInt(unit_id)); 
 			
 			// execute the statement
 			preparedStmt.execute(); 
@@ -166,11 +170,10 @@ public class Tariff {
 	 } 
 	 catch (Exception e) 
 	 { 
-		 output = "Error while deleting the tariff."; 
+		 output = "Error while deleting the unit details."; 
 		 System.err.println(e.getMessage()); 
 	 }
 		
 		return output; 
-	 } 
-	
+	 }
 }

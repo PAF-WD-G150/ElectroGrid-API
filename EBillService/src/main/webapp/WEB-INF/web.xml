@@ -17,5 +17,6 @@
   <servlet-mapping>
     <servlet-name>Jersey Web Application</servlet-name>
     <url-pattern>/TariffService/*</url-pattern>
+    <url-pattern>/UnitService/*</url-pattern>
   </servlet-mapping>
 </web-app>
