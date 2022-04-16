@@ -3,48 +3,7 @@ package com.epayment.Model;
 import com.epayment.DBconnection.*;
 import java.sql.*;
 
-public class CustomerPayment {
-	public String insertCustomerPayment(String card_type, int card_no, String expiry_date, int cvv, String pay_amount)
-	 {
-		 String output = "";
-		 
-		 try
-		 {
-			 
-			 Connection con = DBConnect.connect();
-			 
-			 if (con == null)
-			 {return "Error while connecting to the database for inserting."; }
-			 
-			 // create a prepared statement
-			 String query = " insert into ecpay(`payID`,`payCardType`,`payCardNO`,`payExpiryDate`,`payCVV`,`payAmount`)"
-			 + " values (?, ?, ?, ?, ?,?)";
-			 
-			 PreparedStatement preparedStmt = con.prepareStatement(query);
-			 
-			 // binding values
-			 preparedStmt.setInt(1, 0);
-			 preparedStmt.setString(2, card_type);
-			 preparedStmt.setInt(3, card_no );
-			 preparedStmt.setString(4, expiry_date );
-			 preparedStmt.setInt(5, cvv);
-			 preparedStmt.setDouble(6, Double.parseDouble(pay_amount));
-			 
-			 // execute the statement
-			 preparedStmt.execute();
-			 con.close();
-			 
-			 output = "Inserted successfully";
-		 }
-		 catch (Exception e)
-		 {
-			 output = "Error while inserting the ecpay.";
-			 System.err.println(e.getMessage());
-		 }
-		 
-		 return output;
-	}
-
+public class AdminPayment {
 	public String readItems()
 	{
 		String output = "";
@@ -108,44 +67,38 @@ public class CustomerPayment {
 		return output;
 	}
 	
-	public String updateCustomerPayment(String ID, String card_type, int card_no, String expiry_date, int cvv, String pay_amount)
-	{
+	public String deleteAdminPayment(String payID)
+	 {
 		 String output = "";
 		 
 		 try
 		 {
-			 
 			 Connection con = DBConnect.connect();
 			 
 			 if (con == null)
-			 {return "Error while connecting to the database for updating."; }
+			 {return "Error while connecting to the database for deleting."; }
 			 
 			 // create a prepared statement
-			 String query = "UPDATE ecpay SET payCardType=?,payCardNO=?,payExpiryDate=?,payCVV=?,payAmount=? WHERE payID=?";
+			 String query = "delete from ecpay where payID=?";
 			 
 			 PreparedStatement preparedStmt = con.prepareStatement(query);
 			 
 			 // binding values
-			 preparedStmt.setString(1, card_type);
-			 preparedStmt.setInt(2, card_no);
-			 preparedStmt.setString(3, expiry_date);
-			 preparedStmt.setInt(4, cvv);
-			 preparedStmt.setDouble(5, Double.parseDouble(pay_amount));
-			 preparedStmt.setInt(6, Integer.parseInt(ID));
+			 preparedStmt.setInt(1, Integer.parseInt(payID));
 			 
 			 // execute the statement
 			 preparedStmt.execute();
 			 con.close();
 			 
-			 output = "Updated successfully";
+			 output = "Deleted successfully";
 		 }
 		 catch (Exception e)
 		 {
-			 output = "Error while updating the customerpayment.";
+			 output = "Error while deleting the adminpayment.";
 			 System.err.println(e.getMessage());
 		 }
 		 
 		 return output;
-		 
-	}
+	 }
+
 }
