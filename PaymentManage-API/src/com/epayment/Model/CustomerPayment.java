@@ -4,7 +4,7 @@ import com.epayment.DBconnection.*;
 import java.sql.*;
 
 public class CustomerPayment {
-	public String insertCustomerPayment(String card_type, int card_no, String expiry_date, int cvv, String pay_amount)
+	public String insertCustomerPayment(String card_type, int card_no, String expiry_date, int cvv, String date, String pay_totalamount,String pay_amount)
 	 {
 		 String output = "";
 		 
@@ -17,8 +17,8 @@ public class CustomerPayment {
 			 {return "Error while connecting to the database for inserting."; }
 			 
 			 // create a prepared statement
-			 String query = " insert into ecpay(`payID`,`payCardType`,`payCardNO`,`payExpiryDate`,`payCVV`,`payAmount`)"
-			 + " values (?, ?, ?, ?, ?,?)";
+			 String query = " insert into ecpay(`payID`,`payCardType`,`payCardNO`,`payExpiryDate`,`payCVV`,`payDate`,`payTotalAmount`,`payAmount`)"
+			 + " values (?, ?, ?, ?, ?,?,?,?)";
 			 
 			 PreparedStatement preparedStmt = con.prepareStatement(query);
 			 
@@ -28,7 +28,9 @@ public class CustomerPayment {
 			 preparedStmt.setInt(3, card_no );
 			 preparedStmt.setString(4, expiry_date );
 			 preparedStmt.setInt(5, cvv);
-			 preparedStmt.setDouble(6, Double.parseDouble(pay_amount));
+			 preparedStmt.setString(6, date );
+			 preparedStmt.setDouble(7, Double.parseDouble(pay_totalamount));
+			 preparedStmt.setDouble(8, Double.parseDouble(pay_amount));
 			 
 			 // execute the statement
 			 preparedStmt.execute();
@@ -61,6 +63,8 @@ public class CustomerPayment {
 					 "<th>Pay CardNO</th>" +
 					 "<th>Pay ExpiryDate</th>" +
 					 "<th>Pay CVV</th>" +
+					 "<th>Pay Date</th>" +
+					 "<th>Pay TotalAmount</th>" +
 					 "<th>Pay Amount</th>" +
 					 "<th>Update</th><th>Remove</th></tr>";
 
@@ -76,6 +80,8 @@ public class CustomerPayment {
 				 String payCardNO = Integer.toString(rs.getInt("payCardNO"));
 				 String payExpiryDate = rs.getString("payExpiryDate");
 				 String payCVV = Integer.toString(rs.getInt("payCVV"));
+				 String payDate = rs.getString("payDate");
+				 String payTotalAmount = Double.toString(rs.getDouble("payTotalAmount"));
 				 String payAmount = Double.toString(rs.getDouble("payAmount"));
 				
 				  // Add into the html table
@@ -83,6 +89,8 @@ public class CustomerPayment {
 				 output += "<td>" + payCardNO + "</td>";
 				 output += "<td>" + payExpiryDate + "</td>";
 				 output += "<td>" + payCVV + "</td>";
+				 output += "<td>" + payDate + "</td>";
+				 output += "<td>" + payTotalAmount + "</td>";
 				 output += "<td>" + payAmount + "</td>";
 				 
 				 // buttons
@@ -108,7 +116,7 @@ public class CustomerPayment {
 		return output;
 	}
 	
-	public String updateCustomerPayment(String ID, String card_type, int card_no, String expiry_date, int cvv, String pay_amount)
+	public String updateCustomerPayment(String ID, String card_type, int card_no, String expiry_date, int cvv, String date, String pay_totalamount, String pay_amount)
 	{
 		 String output = "";
 		 
@@ -121,7 +129,7 @@ public class CustomerPayment {
 			 {return "Error while connecting to the database for updating."; }
 			 
 			 // create a prepared statement
-			 String query = "UPDATE ecpay SET payCardType=?,payCardNO=?,payExpiryDate=?,payCVV=?,payAmount=? WHERE payID=?";
+			 String query = "UPDATE ecpay SET payCardType=?,payCardNO=?,payExpiryDate=?,payCVV=?,payDate=?,payTotalAmount=?,payAmount=? WHERE payID=?";
 			 
 			 PreparedStatement preparedStmt = con.prepareStatement(query);
 			 
@@ -130,8 +138,10 @@ public class CustomerPayment {
 			 preparedStmt.setInt(2, card_no);
 			 preparedStmt.setString(3, expiry_date);
 			 preparedStmt.setInt(4, cvv);
-			 preparedStmt.setDouble(5, Double.parseDouble(pay_amount));
-			 preparedStmt.setInt(6, Integer.parseInt(ID));
+			 preparedStmt.setString(5, date);
+			 preparedStmt.setDouble(6, Double.parseDouble(pay_totalamount));
+			 preparedStmt.setDouble(7, Double.parseDouble(pay_amount));
+			 preparedStmt.setInt(8, Integer.parseInt(ID));
 			 
 			 // execute the statement
 			 preparedStmt.execute();

@@ -29,9 +29,11 @@ public class CustomerPaymentService
 										 @FormParam("payCardNO") int payCardNO,
 										 @FormParam("payExpiryDate") String payExpiryDate,
 										 @FormParam("payCVV") int payCVV,
+										 @FormParam("payDate") String payDate,
+										 @FormParam("payTotalAmount") String payTotalAmount,
 										 @FormParam("payAmount") String payAmount)
 	{
-		String output = payObj.insertCustomerPayment(payCardType,payCardNO,payExpiryDate,payCVV,payAmount);
+		String output = payObj.insertCustomerPayment(payCardType,payCardNO,payExpiryDate,payCVV,payDate,payTotalAmount,payAmount);
 		return output;
 	}
 
@@ -50,9 +52,11 @@ public class CustomerPaymentService
 		 int payCardNO		  = payObject.get("payCardNO").getAsInt();
 		 String payExpiryDate = payObject.get("payExpiryDate").getAsString();
 		 int payCVV			  = payObject.get("payCVV").getAsInt();
+		 String payDate       = payObject.get("payDate").getAsString();
+		 String payTotalAmount     = payObject.get("payTotalAmount").getAsString();
 		 String payAmount     = payObject.get("payAmount").getAsString();
 		 
-		 String output = payObj.updateCustomerPayment(payID, payCardType, payCardNO, payExpiryDate, payCVV,payAmount);
+		 String output = payObj.updateCustomerPayment(payID, payCardType, payCardNO, payExpiryDate, payCVV,payDate,payTotalAmount,payAmount);
 		 
 		 return output;
 	}

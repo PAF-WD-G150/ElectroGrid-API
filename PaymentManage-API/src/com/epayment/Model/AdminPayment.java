@@ -20,6 +20,8 @@ public class AdminPayment {
 					 "<th>Pay CardNO</th>" +
 					 "<th>Pay ExpiryDate</th>" +
 					 "<th>Pay CVV</th>" +
+					 "<th>Pay Date</th>" +
+					 "<th>Pay TotalAmount</th>" +
 					 "<th>Pay Amount</th>" +
 					 "<th>Update</th><th>Remove</th></tr>";
 
@@ -35,6 +37,8 @@ public class AdminPayment {
 				 String payCardNO = Integer.toString(rs.getInt("payCardNO"));
 				 String payExpiryDate = rs.getString("payExpiryDate");
 				 String payCVV = Integer.toString(rs.getInt("payCVV"));
+				 String payDate = rs.getString("payDate");
+				 String payTotalAmount = Double.toString(rs.getDouble("payTotalAmount"));
 				 String payAmount = Double.toString(rs.getDouble("payAmount"));
 				
 				  // Add into the html table
@@ -42,6 +46,8 @@ public class AdminPayment {
 				 output += "<td>" + payCardNO + "</td>";
 				 output += "<td>" + payExpiryDate + "</td>";
 				 output += "<td>" + payCVV + "</td>";
+				 output += "<td>" + payDate + "</td>";
+				 output += "<td>" + payTotalAmount + "</td>";
 				 output += "<td>" + payAmount + "</td>";
 				 
 				 // buttons
