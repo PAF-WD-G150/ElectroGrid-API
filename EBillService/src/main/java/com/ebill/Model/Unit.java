@@ -9,7 +9,7 @@ import com.ebill.DBConnection.DBConnect;
 
 public class Unit {
 
-	public String insertUnit(String unit_desc, String unit_charge, String tariff_id) 
+	public String insertUnit(String unit_desc, String unit_charge) 
 	{ 
 		String output = ""; 
 		try
@@ -21,8 +21,8 @@ public class Unit {
 				return "Error while connecting to the database for inserting Tariff."; } 
 				
 			// create a prepared statement
-			String query = " insert into e_units (`unit_id`,`unit_desc`,`unit_charge`,`tariff_id`)"
-					+ " values (?, ?, ?, ?)"; 
+			String query = " insert into e_units (`unit_id`,`unit_desc`,`unit_charge`)"
+					+ " values (?, ?, ?)"; 
 			
 			PreparedStatement preparedStmt = con.prepareStatement(query); 
 	 
@@ -30,7 +30,6 @@ public class Unit {
 			preparedStmt.setInt(1, 0); 
 			preparedStmt.setString(2, unit_desc); 
 			preparedStmt.setDouble(3, Double.parseDouble(unit_charge)); 
-			preparedStmt.setInt(4, Integer.parseInt(tariff_id)); 
 			 
 			
 			// execute the statement
@@ -63,7 +62,6 @@ public class Unit {
 			// Prepare the HTML table to be displayed
 				
 			output = "<table border='1'><tr><th>Unit Description</th><th>Unit Charge</th>" +
-					"<th>Tariff Type</th>" + 
 					"<th>Update</th><th>Remove</th></tr>"; 
 	 
 			String query = "select * from e_units";
@@ -78,12 +76,12 @@ public class Unit {
 				String unit_id = Integer.toString(rs.getInt("unit_id")); 
 				String unit_desc = rs.getString("unit_desc"); 
 				String unit_charge = Double.toString(rs.getDouble("unit_charge")); 
-				String tariff_id = Integer.toString(rs.getInt("tariff_id")); 
+		 
 				
 				// Add into the HTML table
 				output += "<tr><td>" + unit_desc + "</td>"; 
 				output += "<td>" + unit_charge + "</td>"; 
-				output += "<td>" + tariff_id + "</td>"; 
+				
 				 
 				
 				// buttons
@@ -107,7 +105,7 @@ public class Unit {
 		return output; 
 	 }
 	
-	public String updateUnit(String unit_id, String unit_desc, String unit_charge, String tariff_id)
+	public String updateUnit(String unit_id, String unit_desc, String unit_charge)
 	{ 
 		 String output = "";
 		 
@@ -120,14 +118,13 @@ public class Unit {
 			 }
 			 
 			 // create a prepared statement
-			 String query = "UPDATE e_units SET unit_desc=?,unit_charge=?,tariff_id=? WHERE unit_id=?"; 
+			 String query = "UPDATE e_units SET unit_desc=?,unit_charge=? WHERE unit_id=?"; 
 			 PreparedStatement preparedStmt = con.prepareStatement(query);
 			 
 			 // binding values
 			 preparedStmt.setString(1, unit_desc); 
 			 preparedStmt.setDouble(2, Double.parseDouble(unit_charge)); 
-			 preparedStmt.setInt(3, Integer.parseInt(tariff_id)); 
-			 preparedStmt.setInt(4, Integer.parseInt(unit_id)); 
+			 preparedStmt.setInt(3, Integer.parseInt(unit_id)); 
 		 
 			 // execute the statement
 			 preparedStmt.execute(); 

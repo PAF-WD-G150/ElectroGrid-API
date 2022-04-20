@@ -37,11 +37,11 @@ Unit unitObj = new Unit();
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
 	@Produces(MediaType.TEXT_PLAIN) 
-	public String insertTariff(@FormParam("unit_desc") String unit_desc, 
-			@FormParam("unit_charge") String unit_charge, 
-			@FormParam("tariff_id") String tariff_id) 
+	public String insertUnit(@FormParam("unit_desc") String unit_desc, 
+			@FormParam("unit_charge") String unit_charge 
+			) 
 	{ 
-		String output = unitObj.insertUnit(unit_desc, unit_charge, tariff_id); 
+		String output = unitObj.insertUnit(unit_desc, unit_charge); 
 		return output; 
 	}
 	
@@ -57,11 +57,10 @@ Unit unitObj = new Unit();
 		//Read the values from the JSON object
 		String unit_id = unitObject.get("unit_id").getAsString(); 
 		String unit_desc = unitObject.get("unit_desc").getAsString(); 
-		String unit_charge = unitObject.get("unit_charge").getAsString(); 
-		String tariff_id  = unitObject.get("tariff_id").getAsString(); 
+		String unit_charge = unitObject.get("unit_charge").getAsString();  
 		
 		
-		String output = unitObj.updateUnit(unit_id, unit_desc, unit_charge, tariff_id ); 
+		String output = unitObj.updateUnit(unit_id, unit_desc, unit_charge ); 
 		return output; 
 	}
 	
