@@ -20,16 +20,29 @@ public class BillService {
 
 	Bill billObj = new Bill();
 	
-	
+	//get all bill details
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML) 
 	public String readBills() 
 	 { 
 	   return billObj.readBills(); 
-	 } 
+	 }
+	
+	
+	//filter bill details according to the electricity account number
+	@GET
+	@Path("/single")
+	@Produces({ MediaType.TEXT_HTML })
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String GetSingleBill(String id) {
+		JsonObject billObject = new JsonParser().parse(id).getAsJsonObject();
+		String elec_acc_no = billObject.get("elec_acc_no").getAsString();
+		return billObj.GetSBill(elec_acc_no);
+	}
 	 
 
+	//insert a bill
 	@POST
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
@@ -42,6 +55,9 @@ public class BillService {
 		String output = billObj.calculateBill(elec_acc_no, month, current_meter_reading, previous_meter_reading); 
 		return output; 
 	}
+	
+	
+	//update bill records
 	
 	@PUT
 	@Path("/") 
@@ -64,6 +80,7 @@ public class BillService {
 		return output; 
 	}
 	
+	//delete bill
 	@DELETE
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_XML) 

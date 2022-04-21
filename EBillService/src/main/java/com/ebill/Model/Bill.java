@@ -12,6 +12,8 @@ public class Bill {
 	double bill_amount;
 	int consumed_units;
 	
+	//calculating the bill and inserting
+	
 	public String calculateBill(String elec_acc_no, String month, int current_meter_reading, int previous_meter_reading) 
 	{ 
 		String output = ""; 
@@ -151,6 +153,69 @@ public class Bill {
 		} 
 		return output; 
 	 }
+	
+	
+	//View bill details by passing the electricity account number
+	
+	public String GetSBill(String elec_acc_no) {
+		String output = "";
+
+		try {
+			Connection con = DBConnect.connect();
+			
+			if (con == null) {
+				return "Error while connecting to the database for Get Bill Details.";
+			}
+
+
+			// Prepare the HTML table to be displayed
+				
+			output = "<table border='1'><tr><th>Electricity Account Number</th><th>Month</th><th>Current Meter Reading</th><th>Previous Meter Reading</th><th>Consumed Units</th><th>Bill Amount</th>" +
+					"<th>Update</th><th>Remove</th></tr>"; 
+			
+			String query = "select * from e_bill where elec_acc_no="+elec_acc_no;
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+
+		
+
+			while (rs.next()) {
+				String bill_id = Integer.toString(rs.getInt("bill_id")); 
+				String elect_acc_no = rs.getString("elec_acc_no");
+				String month = rs.getString("month");
+				String current_meter_reading = rs.getString("current_meter_reading");
+				String previous_meter_reading = rs.getString("previous_meter_reading");
+				String consumed_units = rs.getString("consumed_units");
+				String bill_amount = Double.toString(rs.getDouble("bill_amount")); 
+		 
+				
+				// Add into the HTML table
+				output += "<tr><td>" + elect_acc_no + "</td>"; 
+				output += "<td>" + month + "</td>"; 
+				output += "<td>" + current_meter_reading + "</td>"; 
+				output += "<td>" + previous_meter_reading + "</td>"; 
+				output += "<td>" + consumed_units + "</td>"; 
+				output += "<td>" + bill_amount + "</td>"; 
+				
+			
+			} 
+				
+			con.close(); 
+			
+			// Complete the HTML table
+			output += "</table>"; 
+				
+			return output;
+			
+		} catch (Exception e) {
+			output = "Error while Get Specific Account's Bill Details.";
+	
+			System.err.println(e.getMessage());
+		}
+		return output;
+	}
+	
+//View all bill details	
 
 	public String readBills() 
 	{ 
