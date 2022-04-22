@@ -9,10 +9,7 @@ import com.customer.DBConnection.DBConnect;
 
 public class Customer {
 	
-	private PreparedStatement preparedStmt;
-	private Connection con;
-
-	public String insertCustomer(String ElectricityAcNo, String CustomerName, String NIC, String Address, String PhoneNumber, String Email, String Province)
+	public String insertCustomer( String CustomerName, String NIC, String Address, String PhoneNumber, String Email, String Province)
 	{
 		String output = "";
 		
@@ -24,18 +21,18 @@ public class Customer {
 		return "Error while connecting to the database";
 		}
 		// create a prepared statement
-		String query = " insert into electricityaccount(`electricityaccount_id`,`ElectricityAcNo`,`CustomerName`,`NIC`,`Address`,`PhoneNumber`,`Email`,`Province`)" + " values (?, ?, ?, ?, ?)";
+		String query = " insert into electricityaccount(`ElectricityAcNo`,`CustomerName`,`NIC`,`Address`,`PhoneNumber`,`Email`,`Province`)" + " values (?, ?, ?, ?, ?,?,?)";
+		
 		PreparedStatement preparedStmt = con.prepareStatement(query);
 		
 		// binding values
 		preparedStmt.setInt(1, 0);
-		preparedStmt.setString(2, ElectricityAcNo);
-		preparedStmt.setString(3, CustomerName);
-		preparedStmt.setString(4, NIC);
-		preparedStmt.setString(5, Address);
-		preparedStmt.setString(6, PhoneNumber);
-		preparedStmt.setString(7, Email);
-		preparedStmt.setString(8, Province);
+		preparedStmt.setString(2, CustomerName);
+		preparedStmt.setString(3, NIC);
+		preparedStmt.setString(4, Address);
+		preparedStmt.setString(5, PhoneNumber);
+		preparedStmt.setString(6, Email);
+		preparedStmt.setString(7, Province);
 
 		
 		//execute the statement
@@ -57,9 +54,7 @@ public class Customer {
 	return output;
 	
 }
-
-
-        public String readCustomer(){
+	public String readCustomer(){
         	
         String output = "";
         try
@@ -67,11 +62,11 @@ public class Customer {
            Connection con = DBConnect.connect();
         if (con == null)
         {
-           return "Error while connecting to the database for reading.";
+           return "Error while connecting to the database for reading customer details.";
         }
         
         // Prepare the html table to be displayed
-        output = "<table border='1'><tr><th>Electricity Account No</th>"+"<th>Customer Name</th><th>NIC</th>"+ "<th>Address</th>" + "<th>Phone Number</th>"+ "<th>Email</th>"+ "<th>Province</th>"+ "<th>Update</th><th>Remove</th></tr>";
+        output = "<table border='1'><tr><th>Customer Name</th><th>NIC</th>"+ "<th>Address</th>" + "<th>Phone Number</th>"+ "<th>Email</th>"+ "<th>Province</th>"+ "<th>Update</th><th>Remove</th></tr>";
         
         String query = "select * from electricityaccount";
         
@@ -82,8 +77,7 @@ public class Customer {
         // iterate through the rows in the result set
         while (rs.next())
         {
-          String electricityaccount_id = Integer.toString(rs.getInt("electricityaccount_id")); 
-          String electricityAcNo = rs.getString("electricityAcNo");
+          String electricityAcNo = Integer.toString(rs.getInt("electricityAcNo")); 
           String customerName = rs.getString("customerName");
           String nic = rs.getString("nic");
           String address = rs.getString("address");
@@ -93,7 +87,7 @@ public class Customer {
           
           
         // Add a row into the html table
-          output += "<tr><td>" + electricityAcNo + "</td>";
+          
           output += "<td>" + customerName + "</td>";
           output += "<td>" + nic + "</td>";
           output += "<td>" + address + "</td>";
@@ -102,7 +96,8 @@ public class Customer {
           output += "<td>" + province + "</td>";
           
           //buttons
-          output += "<td><input name='btnUpdate' " + " type='button' value='Update'></td>" + "<td><form method='post' action='customers.jsp'>" + "<input name='btnRemove' " + " type='submit' value='Remove'>" + "<input name='electricityaccount_id' type='hidden' " + " value='" + electricityaccount_id + "'>" + "</form></td></tr>"; } con.close();
+          output += "<td><input name='btnUpdate' " + " type='button' value='Update'></td>" + "<td><form method='post' action='customers.jsp'>" 
+          + "<input name='btnRemove' " + " type='submit' value='Remove'>" + "<input name='electricityAcNo' type='hidden' " + " value='" + electricityAcNo + "'>" + "</form></td></tr>"; } con.close();
           
           //Complete the html table
           output += "</table>";
@@ -116,7 +111,7 @@ public class Customer {
           return output;
           }
 
-public String updateCustomer(String ElectricityAcNo, String CustomerName, String NIC, String Address, String PhoneNumber, String Email, String Province)
+      public String updateCustomer(String ElectricityAcNo, String CustomerName, String NIC, String Address, String PhoneNumber, String Email, String Province)
      
      { 
 	 String output = "";
@@ -130,19 +125,18 @@ public String updateCustomer(String ElectricityAcNo, String CustomerName, String
 		 }
 		 
 		 // create a prepared statement
-		 String query = "UPDATE electricityaccount SET ElectricityAcNo=?,CustomerName=?,NIC=?,Address=?,PhoneNumber=?,Email=?,Province=?, WHERE electricityaccount_id=?"; 
+		 String query = "UPDATE electricityaccount SET CustomerName=?,NIC=?,Address=?,PhoneNumber=?,Email=?,Province=?, WHERE electricityaccount_id=?"; 
 		 PreparedStatement preparedStmt = con.prepareStatement(query);
 		 
 		 // binding values
-		 preparedStmt.setString(1, ElectricityAcNo);
-		 preparedStmt.setString(2, CustomerName);
-		 preparedStmt.setString(3, NIC);
-		 preparedStmt.setString(4, Address);
-		 preparedStmt.setString(5, PhoneNumber);
-		 preparedStmt.setString(6, Email);
-		 preparedStmt.setString(7, Province);
-		 String electricityaccount_id = null;
-		preparedStmt.setInt(8, Integer.parseInt(electricityaccount_id)); 
+		 
+		 preparedStmt.setString(1, CustomerName);
+		 preparedStmt.setString(2, NIC);
+		 preparedStmt.setString(3, Address);
+		 preparedStmt.setString(4, PhoneNumber);
+		 preparedStmt.setString(5, Email);
+		 preparedStmt.setString(6, Province);
+		 preparedStmt.setInt(7, Integer.parseInt(ElectricityAcNo)); 
 	 
 		 // execute the statement
 		 preparedStmt.execute(); 
@@ -159,7 +153,7 @@ public String updateCustomer(String ElectricityAcNo, String CustomerName, String
 	 return output; 
 } 
 
-public String deleteCustomer(String electricityaccount_id){
+    public String deleteCustomer(String electricityAcNo){
 
 	String output = "";
 
@@ -179,13 +173,13 @@ public String deleteCustomer(String electricityaccount_id){
 
 		// create a prepared statement
 
-		String query = "delete from electricityaccount where electricityaccount_id=?";
+		String query = "delete from electricityaccount where electricityAcNo=?";
 
 		PreparedStatement preparedStmt = con.prepareStatement(query);
 
 		// binding values
 
-		preparedStmt.setInt(1, Integer.parseInt(electricityaccount_id));
+		preparedStmt.setInt(1, Integer.parseInt(electricityAcNo));
 
 		// execute the statement
 
@@ -194,13 +188,11 @@ public String deleteCustomer(String electricityaccount_id){
 		con.close();
 
 		output = "Deleted successfully";
-
 	}
 
 	catch (Exception e)
 
 	{
-
 		output = "Error while deleting the customer details.";
 
 		System.err.println(e.getMessage());

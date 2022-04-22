@@ -23,28 +23,28 @@ public class CustomerService {
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML) 
-	public String readBills() 
+	public String readCustomer() 
 	 { 
 	   return customerObj.readCustomer(); 
 	 } 
 	 
-
+//insert new customer
 	@POST
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
 	@Produces(MediaType.TEXT_PLAIN) 
 	public String insertcustomer(
-			@FormParam("ElectricityAcNo") String ElectricityAcNo, 
+			 
 			@FormParam("CustomerName") String CustomerName, 
 			@FormParam("NIC") String NIC,
-			@FormParam(" Address") String  Address,
-			@FormParam(" PhoneNumber") String  PhoneNumber,
-			@FormParam(" Email") String  Email,
-			@FormParam(" Province") String  Province
+			@FormParam("Address") String  Address,
+			@FormParam("PhoneNumber") String  PhoneNumber,
+			@FormParam("Email") String  Email,
+			@FormParam("Province") String  Province
 			
 			) 
 	{ 
-		String output = customerObj.insertCustomer(ElectricityAcNo, CustomerName, NIC, Address,PhoneNumber, Email, Province); 
+		String output = customerObj.insertCustomer(CustomerName, NIC, Address,PhoneNumber, Email, Province); 
 		return output; 
 	}
 	
@@ -57,8 +57,7 @@ public class CustomerService {
 		//Convert the input string to a JSON object 
 		JsonObject customerObject = new JsonParser().parse(customerData).getAsJsonObject();
 		
-		//Read the values from the JSON object
-		String electricityaccount_id = customerObject.get("electricityaccount_id").getAsString(); 
+		 
 		String ElectricityAcNo = customerObject.get("ElectricityAcNo").getAsString(); 
 		String CustomerName =  customerObject.get("CustomerName").getAsString();
 		String NIC =  customerObject.get("NIC").getAsString();
@@ -82,9 +81,9 @@ public class CustomerService {
 		Document doc = Jsoup.parse(customerData, "", Parser.xmlParser()); 
 	 
 		//Read the value from the element <electricityaccount_id>
-		String electricityaccount_id = doc.select("bill_id").text(); 
+		String electricityAcNo = doc.select("electricityAcNo").text(); 
 		
-		String output = customerObj.deleteCustomer(electricityaccount_id); 
+		String output = customerObj.deleteCustomer(electricityAcNo); 
 		return output; 
 	}
 	

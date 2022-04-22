@@ -10,9 +10,8 @@ public class DBConnect {
 	try
 	{
 		
-	Class.forName("com.mysql.jdbc.Driver");
-	con= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/ecustomerdb",
-	"root", "");
+	Class.forName("com.mysql.cj.jdbc.Driver");
+	con= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/ecustomerdb","root", "");
 	//For testing
 	System.out.print("Successfully connected");
 	}
