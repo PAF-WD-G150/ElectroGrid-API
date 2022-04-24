@@ -63,11 +63,11 @@ public class CustomerService {
 		String NIC =  customerObject.get("NIC").getAsString();
 		String Address =  customerObject.get("Address").getAsString();
 		String PhoneNumber =  customerObject.get("PhoneNumber").getAsString();
-		String  Email =  customerObject.get(" Email").getAsString();
-		String  Province =  customerObject.get(" Province").getAsString();
+		String  Email =  customerObject.get("Email").getAsString();
+		String  Province =  customerObject.get("Province").getAsString();
 		
 		
-		String output = customerObj.updateCustomer(ElectricityAcNo, CustomerName,NIC, Address, PhoneNumber, Email,Province); 
+		String output = customerObj.updateCustomer(ElectricityAcNo,CustomerName,NIC,Address,PhoneNumber,Email,Province); 
 		return output; 
 	}
 	
@@ -80,7 +80,7 @@ public class CustomerService {
 		//Convert the input string to an XML document
 		Document doc = Jsoup.parse(customerData, "", Parser.xmlParser()); 
 	 
-		//Read the value from the element <electricityaccount_id>
+		//Read the value from the element <electricityAcNo>
 		String electricityAcNo = doc.select("electricityAcNo").text(); 
 		
 		String output = customerObj.deleteCustomer(electricityAcNo); 

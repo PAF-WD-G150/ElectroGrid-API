@@ -96,8 +96,7 @@ public class Customer {
           output += "<td>" + province + "</td>";
           
           //buttons
-          output += "<td><input name='btnUpdate' " + " type='button' value='Update'></td>" + "<td><form method='post' action='customers.jsp'>" 
-          + "<input name='btnRemove' " + " type='submit' value='Remove'>" + "<input name='electricityAcNo' type='hidden' " + " value='" + electricityAcNo + "'>" + "</form></td></tr>"; } con.close();
+          output += "<td><input name='btnUpdate' " + " type='button' value='Update'></td>" + "<td><form method='post' action='customers.jsp'>" + "<input name='btnRemove' " + " type='submit' value='Remove'>" + "<input name='electricityAcNo' type='hidden' " + " value='" + electricityAcNo + "'>" + "</form></td></tr>"; } con.close();
           
           //Complete the html table
           output += "</table>";
@@ -125,7 +124,7 @@ public class Customer {
 		 }
 		 
 		 // create a prepared statement
-		 String query = "UPDATE electricityaccount SET CustomerName=?,NIC=?,Address=?,PhoneNumber=?,Email=?,Province=?, WHERE electricityaccount_id=?"; 
+		 String query = "UPDATE electricityaccount SET CustomerName=?,NIC=?,Address=?,PhoneNumber=?,Email=?,Province=? WHERE ElectricityAcNo=?"; 
 		 PreparedStatement preparedStmt = con.prepareStatement(query);
 		 
 		 // binding values
