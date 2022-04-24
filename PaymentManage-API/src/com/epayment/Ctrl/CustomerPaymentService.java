@@ -13,14 +13,6 @@ public class CustomerPaymentService
 {
 	CustomerPayment payObj = new CustomerPayment();
 	
-	@GET
-	@Path("/")
-	@Produces(MediaType.TEXT_HTML)
-	public String readItems()
-	 {
-		return payObj.readItems();
-	}
-	
 	@POST
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
