@@ -65,8 +65,7 @@ public class CustomerService {
 		String PhoneNumber =  customerObject.get("PhoneNumber").getAsString();
 		String  Email =  customerObject.get("Email").getAsString();
 		String  Province =  customerObject.get("Province").getAsString();
-		
-		
+
 		String output = customerObj.updateCustomer(ElectricityAcNo,CustomerName,NIC,Address,PhoneNumber,Email,Province); 
 		return output; 
 	}
