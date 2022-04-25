@@ -55,7 +55,7 @@ public class CustomerFaultReport {
 	 } 
 	
 	
-	public String readComplaints() 
+	public String readComplaints(String electricity_acc_no) 
 	{ 
 		String output = ""; 
 		try
@@ -72,7 +72,7 @@ public class CustomerFaultReport {
 			output = "<table border='1'><tr><th>Electricity Account Number</th><th>Complaint Type</th><th>Contact Details</th><th>Attachments</th><th>Processing Status</th><th>Reply Message</th>" +
 					"<th>Remove</th></tr>"; 
 	 
-			String query = "select * from complaints";
+			String query = "select * from complaints where electricity_acc_no="+electricity_acc_no;
 			
 			Statement stmt = con.createStatement();
 			
@@ -82,7 +82,7 @@ public class CustomerFaultReport {
 			while (rs.next()) 
 			{ 
 				String complaint_id = Integer.toString(rs.getInt("complaint_id")); 
-				String electricity_acc_no = rs.getString("electricity_acc_no"); 
+				String elec_acc_no = rs.getString("electricity_acc_no"); 
 				String complaint_type = rs.getString("complaint_type"); 
 				String contact_details = rs.getString("contact_details"); 
 				String attachments = rs.getString("attachments");
@@ -91,7 +91,7 @@ public class CustomerFaultReport {
 		 
 				
 				// Add into the HTML table
-				output += "<tr><td>" + electricity_acc_no + "</td>"; 
+				output += "<tr><td>" + elec_acc_no + "</td>"; 
 				output += "<td>" + complaint_type + "</td>"; 
 				output += "<td>" + contact_details + "</td>"; 
 				output += "<td>" + attachments + "</td>"; 
@@ -111,6 +111,8 @@ public class CustomerFaultReport {
 			
 			// Complete the HTML table
 			output += "</table>"; 
+			
+			return output;
 		} 
 		catch (Exception e) 
 		{ 
@@ -147,10 +149,51 @@ public class CustomerFaultReport {
 	 } 
 	 catch (Exception e) 
 	 { 
-		 output = "Error while deleting the unit details."; 
+		 output = "Error while deleting the details."; 
 		 System.err.println(e.getMessage()); 
 	 }
 		
 		return output; 
 	 }
+	
+	public String updateComplaint(String complaint_id, String electricity_acc_no, String complaint_type, String contact_details, String attachments, String processing_status, String reply_message)
+	{ 
+		 String output = "";
+		 
+		 try
+		 { 
+			 Connection con = DBConnect.connect(); 
+			 if (con == null) 
+			 {
+				 return "Error while connecting to the database for updating."; 
+			 }
+			
+			 
+			 // create a prepared statement
+			 String query = "UPDATE complaints SET electricity_acc_no=?, complaint_type=?, contact_details=?, attachments=?, processing_status=?,reply_message=? WHERE complaint_id=?"; 
+			 PreparedStatement preparedStmt = con.prepareStatement(query);
+			 
+			 // binding values
+			 preparedStmt.setString(1, electricity_acc_no); 
+			 preparedStmt.setString(2, complaint_type); 
+			 preparedStmt.setString(3, contact_details); 
+			 preparedStmt.setString(4, attachments);
+			 preparedStmt.setString(5, processing_status);
+			 preparedStmt.setString(6, reply_message);
+			 preparedStmt.setInt(7, Integer.parseInt(complaint_id));
+		 
+			 // execute the statement
+			 preparedStmt.execute(); 
+		 
+			 con.close(); 
+			 output = "Updated successfully"; 
+		 } 
+		 catch (Exception e) 
+		 { 
+			 output = "Error while updating details."; 
+			 System.err.println(e.getMessage()); 
+		 } 
+		 
+		 return output; 
+	} 
 }

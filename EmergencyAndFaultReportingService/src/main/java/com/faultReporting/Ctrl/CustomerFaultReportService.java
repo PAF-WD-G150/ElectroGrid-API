@@ -25,11 +25,14 @@ public class CustomerFaultReportService {
 CustomerFaultReport complaintObj = new CustomerFaultReport();
 	
 	@GET
-	@Path("/")
-	@Produces(MediaType.TEXT_HTML) 
-	public String readUnits() 
+	@Path("/single")
+	@Produces({MediaType.TEXT_HTML})
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String readComplaints(String id) 
 	 { 
-	   return complaintObj.readComplaints(); 
+		JsonObject complaintObject = new JsonParser().parse(id).getAsJsonObject();
+		String electricity_acc_no = complaintObject.get("electricity_acc_no").getAsString();
+	   return complaintObj.readComplaints(electricity_acc_no); 
 	 } 
 	
 
@@ -47,6 +50,29 @@ CustomerFaultReport complaintObj = new CustomerFaultReport();
 		return output; 
 	}
 	
+
+	@PUT
+	@Path("/") 
+	@Consumes(MediaType.APPLICATION_JSON) 
+	@Produces(MediaType.TEXT_PLAIN) 
+	public String updateComplaint(String complaintData) 
+	{ 
+		//Convert the input string to a JSON object 
+		JsonObject complaintObject = new JsonParser().parse(complaintData).getAsJsonObject();
+		
+		//Read the values from the JSON object
+		String complaint_id = complaintObject.get("complaint_id").getAsString();
+		String electricity_acc_no = complaintObject.get("electricity_acc_no").getAsString();
+		String complaint_type = complaintObject.get("complaint_type").getAsString();
+		String contact_details = complaintObject.get("contact_details").getAsString();
+		String attachments = complaintObject.get("attachments").getAsString();
+		String processing_status = complaintObject.get("processing_status").getAsString(); 
+		String reply_message = complaintObject.get("reply_message").getAsString();  
+	 
+		
+		String output = complaintObj.updateComplaint(complaint_id, electricity_acc_no, complaint_type, contact_details, attachments, processing_status, reply_message); 
+		return output; 
+	}
 	
 	@DELETE
 	@Path("/") 
