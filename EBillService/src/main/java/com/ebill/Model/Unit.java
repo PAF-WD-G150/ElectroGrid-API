@@ -18,7 +18,7 @@ public class Unit {
 			
 			if (con == null) 
 			{
-				return "Error while connecting to the database for inserting Tariff."; } 
+				return "Error while connecting to the database for inserting Unit."; } 
 				
 			// create a prepared statement
 			String query = " insert into e_units (`unit_id`,`unit_desc`,`unit_charge`)"

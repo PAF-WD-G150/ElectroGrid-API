@@ -26,7 +26,7 @@ Unit unitObj = new Unit();
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML) 
-	public String readTariffs() 
+	public String readUnits() 
 	 { 
 	   return unitObj.readUnits(); 
 	 } 
@@ -41,8 +41,7 @@ Unit unitObj = new Unit();
 			@FormParam("unit_charge") String unit_charge 
 			) 
 	{ 
-		String output = unitObj.insertUnit(unit_desc, unit_charge); 
-		return output; 
+		return unitObj.insertUnit(unit_desc, unit_charge); 
 	}
 	
 	@PUT
@@ -60,8 +59,7 @@ Unit unitObj = new Unit();
 		String unit_charge = unitObject.get("unit_charge").getAsString();  
 		
 		
-		String output = unitObj.updateUnit(unit_id, unit_desc, unit_charge ); 
-		return output; 
+		return unitObj.updateUnit(unit_id, unit_desc, unit_charge ); 
 	}
 	
 	@DELETE
@@ -75,7 +73,6 @@ Unit unitObj = new Unit();
 	 
 		//Read the value from the element <unit_id>
 		String unit_id = doc.select("unit_id").text(); 
-		String output = unitObj.deleteUnit(unit_id); 
-		return output; 
+		return unitObj.deleteUnit(unit_id); 
 	}
 }

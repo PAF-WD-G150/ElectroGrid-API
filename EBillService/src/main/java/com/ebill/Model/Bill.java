@@ -170,8 +170,7 @@ public class Bill {
 
 			// Prepare the HTML table to be displayed
 				
-			output = "<table border='1'><tr><th>Electricity Account Number</th><th>Month</th><th>Current Meter Reading</th><th>Previous Meter Reading</th><th>Consumed Units</th><th>Bill Amount</th>" +
-					"<th>Update</th><th>Remove</th></tr>"; 
+			output = "<table border='1'><tr><th>Electricity Account Number</th><th>Month</th><th>Current Meter Reading</th><th>Previous Meter Reading</th><th>Consumed Units</th><th>Bill Amount</th>"; 
 			
 			String query = "select * from e_bill where elec_acc_no="+elec_acc_no;
 			Statement stmt = con.createStatement();
@@ -179,8 +178,7 @@ public class Bill {
 
 		
 
-			while (rs.next()) {
-				String bill_id = Integer.toString(rs.getInt("bill_id")); 
+			while (rs.next()) { 
 				String elect_acc_no = rs.getString("elec_acc_no");
 				String month = rs.getString("month");
 				String current_meter_reading = rs.getString("current_meter_reading");
