@@ -40,7 +40,7 @@ public class CustomerPayment {
 		 }
 		 catch (Exception e)
 		 {
-			 output = "Error while inserting the ecpay.";
+			 output = "Error while inserting the customer payment.";
 			 System.err.println(e.getMessage());
 		 }
 		 
@@ -82,7 +82,7 @@ public class CustomerPayment {
 		 }
 		 catch (Exception e)
 		 {
-			 output = "Error while updating the customerpayment.";
+			 output = "Error while updating the customer payment.";
 			 System.err.println(e.getMessage());
 		 }
 		 

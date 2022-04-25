@@ -66,7 +66,7 @@ public class AdminPayment {
 		}
 		catch (Exception e)
 		{
-			 output = "Error while reading the items.";
+			 output = "Error while reading the customer payment.";
 			 System.err.println(e.getMessage());
 		}
 		
@@ -100,7 +100,7 @@ public class AdminPayment {
 		 }
 		 catch (Exception e)
 		 {
-			 output = "Error while deleting the adminpayment.";
+			 output = "Error while deleting the customer payment.";
 			 System.err.println(e.getMessage());
 		 }
 		 
