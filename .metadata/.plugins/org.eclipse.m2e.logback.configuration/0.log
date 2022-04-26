@@ -327,3 +327,4 @@
 2022-04-24 16:51:36,959 [Worker-443: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory F:\Y3S1\PAF project\ElectroGrid-API\CustomerManage-API\src\main\resources
 2022-04-24 16:51:36,960 [Worker-443: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
 2022-04-24 16:51:36,961 [Worker-443: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory F:\Y3S1\PAF project\ElectroGrid-API\CustomerManage-API\src\test\resources
+2022-04-25 21:46:48,183 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
