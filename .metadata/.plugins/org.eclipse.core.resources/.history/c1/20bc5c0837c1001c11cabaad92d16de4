@@ -1,7 +1,0 @@
-package com.ecustomer.Ctrl;
-
-public class CustomerService {
-	
-	public String insertCustomer(String ElectrictyAcNo, String name, String price, String desc);
-
-}
