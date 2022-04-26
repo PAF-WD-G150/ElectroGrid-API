@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+F:\Y3S1\PAF project\ElectroGrid-API\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+345876356.index
+1834441625.index
+3882644776.index
+1096374178.index
+1039513709.index
+4117850162.index

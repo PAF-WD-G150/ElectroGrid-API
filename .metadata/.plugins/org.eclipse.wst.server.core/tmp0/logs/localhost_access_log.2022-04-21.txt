@@ -1,0 +1,13 @@
+127.0.0.1 - - [21/Apr/2022:13:17:33 +0530] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [21/Apr/2022:13:17:45 +0530] "GET /CustomerManage-API/ HTTP/1.1" 404 774
+127.0.0.1 - - [21/Apr/2022:15:27:41 +0530] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [21/Apr/2022:15:27:51 +0530] "GET /CustomerManage-API/ HTTP/1.1" 404 774
+0:0:0:0:0:0:0:1 - - [21/Apr/2022:21:21:52 +0530] "GET /CustomerManage-API/ HTTP/1.1" 404 774
+127.0.0.1 - - [21/Apr/2022:21:32:35 +0530] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [21/Apr/2022:21:32:35 +0530] "GET /CustomerManage-API/ HTTP/1.1" 404 774
+127.0.0.1 - - [21/Apr/2022:21:57:49 +0530] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [21/Apr/2022:21:57:49 +0530] "GET /CustomerManage-API/ HTTP/1.1" 404 774
+127.0.0.1 - - [21/Apr/2022:22:13:28 +0530] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [21/Apr/2022:22:13:28 +0530] "GET /CustomerManage-API/ HTTP/1.1" 404 774
+0:0:0:0:0:0:0:1 - - [21/Apr/2022:23:33:32 +0530] "POST /CustomerManage-API/CustomerService/Customers/ HTTP/1.1" 404 808
+0:0:0:0:0:0:0:1 - - [21/Apr/2022:23:33:55 +0530] "POST /CustomerManage-API/CustomerService/Customers/ HTTP/1.1" 404 808
